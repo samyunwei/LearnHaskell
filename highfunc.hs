@@ -52,7 +52,45 @@ addThree' = \x -> \y -> \z -> x+y+z
 flip'' :: (a -> b -> c) ->b ->a -> c
 flip'' f = \x y -> f y x
 
+sum' :: (Num a) => [a] -> a
+--sum' xs = foldl (\acc x -> acc + x) 0 xs
+sum' = foldl (+) 0
+
+map' :: (a -> b) -> [a] -> [b]
+--map' f xs = foldr(\x acc -> f x : acc) [] xs
+map' f xs = foldl(\acc x -> acc ++ [f x]) [] xs
+
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' y ys = foldr (\x acc -> if x == y then True else acc ) False ys
 
 
+maximum' :: (Ord a) => [a] -> a
+maximum' = foldl1 max
+
+
+reverse' :: [a] -> [a]
+--reverse' = foldl (\acc x -> x :acc) []
+reverse' = foldl (flip (:) ) []
+
+product' :: (Num a) => [a] -> a
+product' = foldl (*) 1
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' p = foldr(\x acc -> if p x then x : acc else acc) []
+
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
+
+and' :: [Bool] -> Bool
+and' xs = foldr (&&) True xs
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+fn = ceiling . negate . tan .cos . max 50
+
+
+oddSquareSum :: Integer
+oddSquareSum = sum . takeWhile(<10000) . filter odd $ map (^2) [1..]
 
 
