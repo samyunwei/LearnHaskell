@@ -10,4 +10,7 @@
 --import Data.List (nub,sort)
 --import Data.List hiding(nub)
 --import qualified Data.Map
-import qualified Data.Map as M
+--import qualified Data.Map as M
+import Data.List
+wordNums :: String -> [(String,Int)]
+wordNums = map(\ws -> (head ws,length ws)) . group . sort .words
