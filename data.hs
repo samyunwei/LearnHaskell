@@ -86,30 +86,67 @@
 --(Vector i j k) `vmult` m = Vector (i * m ) (j * m) (k * m)
 
 
-data Person = Person{
-    firstName :: String
-   ,lastName  :: String
-   ,age :: Int
-}deriving (Eq,Show,Read)
+--data Person = Person{
+--    firstName :: String
+--   ,lastName  :: String
+--   ,age :: Int
+--}deriving (Eq,Show,Read)
+--
+--
+--mikeD = Person{ firstName="Michael"
+--                ,lastName = "Diamond"
+--                ,age = 43
+--}
+--
+--adRock = Person{ firstName="Adam"
+--                ,lastName = "Horovitz"
+--                ,age = 41
+--}
+--
+--mca = Person{ firstName="Adam"
+--                ,lastName = "Yauch"
+--                ,age = 44
+--}
+--
+--mysteryDude = "Person { firstName = \"Michael\"" ++ ", lastName = \"Diamond\"" ++ ",age = 43}"
+--
+--
+--data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving(Eq,Ord,Show,Read,Bouded,Enum)
+--
+--type PhoneNumber = String
+--type Name = String
+--type PhoneBook = [(Name,PhoneNumber)]
+--
+--inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
+--inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
+--
+--phoneBook = [("betty","555-2938"),("bonnie","452-2928"),("pasty","493-2928"),("lucille","205-2928"),("wendy","939-8282"),("penny","853-2492")]
+--
+--
+--import Data.Map
+--
+--type AssocList k v = [(k,v)]
+--type InMap = Map Int
+--
+import qualified Data.Map as Map
 
+data LockerState = Taken | Free deriving (Show,Eq)
+type Code = String
+type LockerMap = Map.Map Int (LockerState,Code)
 
-mikeD = Person{ firstName="Michael"
-                ,lastName = "Diamond"
-                ,age = 43
-}
+lockerLookup :: Int -> LockerMap -> Either String Code
+lockerLookup lockerNumber map = case Map.lookup lockerNumber map of 
+    Nothing -> Left $ "Locker" ++ show lockerNumber ++ "doesn't exist!"
+    Just (state,code) -> if state /= Taken
+                            then Right code
+                            else Left $ "Locker" ++ show lockerNumber ++ "is alreadytaken"
 
-adRock = Person{ firstName="Adam"
-                ,lastName = "Horovitz"
-                ,age = 41
-}
-
-mca = Person{ firstName="Adam"
-                ,lastName = "Yauch"
-                ,age = 44
-}
-
-mysteryDude = "Person { firstName = \"Michael\"" ++ ", lastName = \"Diamond\"" ++ ",age = 43}"
-
-
-data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving(Eq,Ord,Show,Read,Bouded,Enum)
+lockers :: LockerMap
+lockers = Map.fromList[(100,(Taken,"ZD39I"))
+                        ,(101,(Free,"JAH3I"))
+                        ,(103,(Free,"IQSA9"))
+                        ,(105,(Free,"QOTSA"))
+                        ,(109,(Taken,"893JJ"))
+                        ,(110,(Taken,"99292"))
+                        ]
 
