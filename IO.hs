@@ -9,7 +9,37 @@
 --    putStrLn "Hello,what's your name?"
 --    name <- getLine
 --    putStrLn ("Hey " ++ name ++ ", your rock!")
+--main = do
+--    foo <- putStrLn "Hello,what's your name?"
+--    name <- getLine
+--    putStrLn ("Hey " ++ name ++ ", your rock!")
+
+--import Data.Char
+--main = do
+--   putStrLn "What's your first name?'"
+--   firstName <- getLine
+--   putStrLn "What's your last name?"
+--   lastname <- getLine
+--   let bigFistName = map toUpper firstName
+--       bigLastName = map toUpper lastname
+--   putStrLn $ "hey " ++ bigFistName ++ " " ++ bigLastName ++ ", how are you?"
+--
+--
+
+--main = do
+--    return ()
+--    return "HAHAHA"
+--    line <- getLine
+--    return "BLAH BLAH BLAH"
+--    return 4
+--    putStrLn line
+
+--main = do
+--    a <- return "hell"
+--    b <- return "yeah!"
+--    putStrLn $ a ++ " " ++ b
+
 main = do
-    foo <- putStrLn "Hello,what's your name?"
-    name <- getLine
-    putStrLn ("Hey " ++ name ++ ", your rock!")
+    let a =  "hell"
+        b =  "yeah!"
+    putStrLn $ a ++ " " ++ b
